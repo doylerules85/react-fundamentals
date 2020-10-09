@@ -1,3 +1,4 @@
+import { black } from 'chalk'
 // Styling
 // http://localhost:3000/isolated/exercise/05.js
 
@@ -12,16 +13,29 @@ import '../box-styles.css'
 
 // 🐨 add a style prop to each of them as well so their background color
 // matches what the text says it should be as well as `fontStyle: 'italic'`
-const smallBox = <div>small lightblue box</div>
-const mediumBox = <div>medium pink box</div>
-const largeBox = <div>large orange box</div>
+// const smallBox = <div style={{backgroundColor: 'lightblue', fontStyle: 'italic' }} className="box box--small">small lightblue box</div>
+// const mediumBox = <div style={{backgroundColor: 'pink', fontStyle: 'italic' }} className="box box--medium">medium pink box</div>
+// const largeBox = <div style={{backgroundColor: 'orange', fontStyle: 'italic' }} className="box box--large">large orange box</div>
+
+const Box = ({style, className = '', size, ...otherProps}) => {
+  const sizeName = size ? `box--${size}` : '';
+  return ( 
+    <div
+      style={{ fontStyle: 'italic', ...style }} 
+      className={`box ${className} ${sizeName}`}
+      {...otherProps}
+    >
+    </div>
+  )
+}
 
 function App() {
   return (
     <div>
-      {smallBox}
-      {mediumBox}
-      {largeBox}
+      <Box style={{backgroundColor:'lightblue'}} className="test" size="small">small lightblue box</Box>
+      <Box style={{backgroundColor:'pink'}} size="medium">medium pink box</Box>
+      <Box style={{backgroundColor:'orange'}} size="large">large orange box</Box>
+      <Box>Unsized Box</Box>
     </div>
   )
 }
